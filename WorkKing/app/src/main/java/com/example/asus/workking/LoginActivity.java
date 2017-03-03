@@ -3,14 +3,11 @@ package com.example.asus.workking;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -18,12 +15,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.workking.Database.DatabaseOperate;
-import com.example.asus.workking.Database.InitTables;
-import com.example.asus.workking.Database.StuDBHelper;
-import com.example.asus.workking.Tools.MyThread;
-
-import org.apache.commons.logging.Log;
+import com.example.asus.workking.Database.DBHelper;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,9 +40,6 @@ public class LoginActivity extends AppCompatActivity {
                 case 1:
                     //界面跳转
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username",mUsername.getText().toString());
-                    intent.putExtras(bundle);
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
                     finish();
@@ -63,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //查询数据库对象
     private Cursor mCursor = null;
-    private StuDBHelper mDataBases =null;//数据库对象
+    private DBHelper mDataBases =null;//数据库对象
     private SQLiteDatabase mDataOperate = null;
 
     @Override
@@ -101,33 +90,35 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 mProBar.setVisibility(View.VISIBLE);
 
-                while (mCursor.moveToNext()) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            while (mCursor.moveToNext()) {
 
-                    if (mCursor.getString(1).equals(mUsername.getText().toString()) &&
-                            mCursor.getString(4).equals(mPassword.getText().toString())) {
+                                if (mCursor.getString(1).equals(mUsername.getText().toString()) &&
+                                        mCursor.getString(4).equals(mPassword.getText().toString())) {
 
-                        MainActivity.loadDataFlag = mCursor.getInt(2);
-                        MainActivity.myDB = mDataBases;
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Thread.sleep(2000);
+                                    MainActivity.myDB = mDataBases;
                                     //发送handle信号
                                     Message msg = new Message();
                                     msg.what = 1;
                                     handler.sendMessage(msg);
-                                } catch (Exception e) {
+
+                                } else {
+                                    mProBar.setVisibility(View.GONE);
+                                    Toast.makeText(LoginActivity.this, "Username or password is wrong", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
-                        }).start();
 
-                    } else {
-                        mProBar.setVisibility(View.GONE);
-                        Toast.makeText(LoginActivity.this, "Username or password is wrong", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {}
+
                     }
+                }).start();
 
-                }
+
             }
         });
 
@@ -163,8 +154,10 @@ public class LoginActivity extends AppCompatActivity {
         this.mStudent = (RadioButton) super.findViewById(R.id.selectStudent);
         this.mTeacher = (RadioButton) super.findViewById(R.id.selectTeacher);
         this.mProBar = (ProgressBar) super.findViewById(R.id.progressBar);
-        this.mDataBases = new StuDBHelper(LoginActivity.this,"UserInfo",null,1);
+        this.mDataBases = new DBHelper(LoginActivity.this,"UserInfo",null,1);
         this.mDataOperate = mDataBases.getReadableDatabase();
         this.mCursor = mDataOperate.query("UserInfo",null,null,null,null,null,null);
+
+        RegisterActivity.mOperate = mDataBases.getWritableDatabase();
     }
 }

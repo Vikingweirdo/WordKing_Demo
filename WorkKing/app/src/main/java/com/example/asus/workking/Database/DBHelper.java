@@ -9,7 +9,7 @@ import android.util.Log;
  * Created by asus on 2017/2/12.
  */
 
-public class StuDBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "Workking";
     public static final int VERSION = 1;
@@ -19,8 +19,8 @@ public class StuDBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db = null;
 
     //必须要有构造函数
-    public StuDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
-                       int version) {
+    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
+                    int version) {
         super(context, "MyData", factory, version);
         this.mTableName = name;
     }
