@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="choose unit" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <TableRow
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock1"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/unlock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock1"
+                    android:text="Unit 1-Section A"
+                    android:layout_alignBottom="@+id/lock1"
+                    android:textAllCaps="false"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock2"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock2"
+                    android:text="Unit 1-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock2"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock3"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock3"
+                    android:text="Unit 2-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock3"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock4"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock4"
+                    android:text="Unit 2-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock4"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock5"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock5"
+                    android:text="Unit 3-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock5"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock6"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock6"
+                    android:text="Unit 3-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock6"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock7"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock7"
+                    android:text="Unit 4-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock7"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock8"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock8"
+                    android:text="Unit 4-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock8"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock9"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock9"
+                    android:text="Unit 5-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock9"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"
+                />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock10"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock10"
+                    android:text="Unit 5-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock10"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock11"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock11"
+                    android:text="Unit 6-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock11"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock12"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock12"
+                    android:text="Unit 6-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock12"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock13"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock13"
+                    android:text="Unit 7-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock13"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock14"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock14"
+                    android:text="Unit 7-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock14"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock15"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock15"
+                    android:text="Unit 8-Section A"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock15"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/lock16"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:src="@drawable/islock" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lock16"
+                    android:text="Unit 8-Section B"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBottom="@+id/lock16"
+                    android:clickable="true"
+                    android:textColor="@drawable/textview"/>
+            </RelativeLayout>
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

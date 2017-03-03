@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bfbfcf">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7fbaa7"
+        android:minHeight="?attr/actionBarSize" />
+
+    <TableLayout
+        android:id="@+id/Topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:stretchColumns="*"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            >
+
+            <ImageButton
+                android:id="@+id/book1"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#7fbaa7"
+                android:src="@drawable/book1change" />
+
+            <ImageButton
+                android:id="@+id/book2"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#7fbaa7"
+                android:src="@drawable/book2change" />
+
+            <ImageButton
+                android:id="@+id/book3"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#7fbaa7"
+                android:src="@drawable/book3change" />
+
+            <ImageButton
+                android:id="@+id/book4"
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#7fbaa7"
+                android:src="@drawable/book4change" />
+
+        </TableRow>
+
+    </TableLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/Topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:orientation="vertical"
+        >
+        <TableLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableLayout>
+        <TableLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:gravity="bottom"
+                android:layout_width="match_parent">
+                <TextView
+                    android:text="@string/unitname"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+                <TextView
+                    android:text="@string/wordNum"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                >
+
+                <TextView
+                    android:text="@string/view"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+                <TextView
+                    android:text="@string/view"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:gravity="bottom"
+                android:layout_width="match_parent">
+                <TextView
+                    android:text="First"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+                <TextView
+                    android:text="50"
+                    android:textSize="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center" />
+            </TableRow>
+        </TableLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:background="#bfbfcf"
+                android:src="@drawable/beggingchange"
+                android:id="@+id/begging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

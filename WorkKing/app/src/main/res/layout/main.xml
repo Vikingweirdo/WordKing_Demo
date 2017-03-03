@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:hyman="http://schemas.android.com/apk/res/com.example.asus.workking"
+        android:id="@+id/resultbody"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpage"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            >
+
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+
+            android:background="#e8e8e8"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            >
+
+            <com.example.asus.workking.ChangeColorIconWithText
+
+                android:id="@+id/id_indicator_one"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                hyman:color="#ff45c01a"
+                hyman:icon="@drawable/homepage"
+                hyman:text="home"
+                hyman:text_size="12sp"
+                />
+
+            <com.example.asus.workking.ChangeColorIconWithText
+                android:id="@+id/id_indicator_two"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                hyman:color="#ff45c01a"
+                hyman:icon="@drawable/text"
+                hyman:text="text"
+                hyman:text_size="12sp"
+                />
+
+            <com.example.asus.workking.ChangeColorIconWithText
+                android:id="@+id/id_indicator_three"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                hyman:color="#ff45c01a"
+                hyman:icon="@drawable/our_message"
+                hyman:text="me"
+                hyman:text_size="12sp"
+                />
+
+
+            <com.example.asus.workking.ChangeColorIconWithText
+                android:id="@+id/id_indicator_fouth"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                hyman:color="#ff45c01a"
+                hyman:icon="@drawable/ranking"
+                hyman:text="rank"
+                hyman:text_size="12sp"
+                />
+
+        </LinearLayout>
+</LinearLayout>
+

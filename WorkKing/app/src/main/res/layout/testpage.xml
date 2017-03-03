@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bfbfcf">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#b0b0b4"
+        android:minHeight="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/toolbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:text="Testing"
+        android:textColor="#717070"
+        android:textSize="30dp"
+        android:textStyle="normal|bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="7"
+        android:orientation="vertical"
+        >
+
+        <TableLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <TableLayout
+            android:layout_weight="2.3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                >
+
+                <ImageButton
+                    android:layout_weight="1"
+                    android:id="@+id/spelling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/spellingchange"
+                    android:background="#bfbfcf"
+                     />
+
+                <ImageButton
+                    android:layout_weight="1"
+                    android:id="@+id/translation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/translationchange"
+                    android:background="#bfbfcf"
+                     />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_weight="1.7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TableRow
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                >
+
+                <ImageButton
+                    android:layout_weight="1"
+                    android:id="@+id/pictures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pictureschange"
+                    android:background="#bfbfcf"
+                    />
+
+                <ImageButton
+                    android:layout_weight="1"
+                    android:id="@+id/listening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/listeningchange"
+                    android:background="#bfbfcf"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

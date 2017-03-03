@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WorkKing</string>
+    <string name="title"><b>It always seems impossible until its done.</b></string>
+    <string name="register"><u>Register</u></string>
+    <string name="regtitle"><b>Starting is the hardest part...</b></string>
+
+    <string name="unitname"><b>progress</b></string>
+    <string name="wordNum"><b>quantity</b></string>
+    <string name="view"><b>-------------</b></string>
+
+</resources>

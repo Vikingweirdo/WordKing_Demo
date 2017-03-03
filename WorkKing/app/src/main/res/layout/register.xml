@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffff"
+    tools:context="com.example.asus.workking.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e3e5e6"
+        android:minHeight="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/toolbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:text="Register"
+
+        android:textColor="#717070"
+        android:textSize="30dp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/RegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="160dp"
+        android:paddingLeft="15dp"
+        android:text="@string/regtitle"
+        android:textSize="25dp" />
+
+    <LinearLayout
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:id="@+id/Rusername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="Username"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/Rpassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Rusername"
+            android:hint="Password"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingTop="20dp"
+            android:password="true" />
+
+        <EditText
+            android:id="@+id/Rreconfim"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Rpassword"
+            android:hint="Reconfirm"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingTop="20dp"
+            android:password="true" />
+
+        <ImageButton
+            android:id="@+id/registerbtu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/registerpress"
+            android:layout_gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Rreconfim"
+            android:paddingTop="50dp"
+            android:background="#FFFF"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
