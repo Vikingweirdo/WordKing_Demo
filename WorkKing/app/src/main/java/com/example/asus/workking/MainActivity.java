@@ -1,7 +1,6 @@
 package com.example.asus.workking;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +13,7 @@ import android.view.View;
 
 import com.example.asus.workking.Database.DBHelper;
 import com.example.asus.workking.Tools.InsertData;
+import com.example.asus.workking.Tools.Words;
 import com.example.asus.workking.ViewPageFragment.HomeFragment;
 import com.example.asus.workking.ViewPageFragment.MeFragment;
 import com.example.asus.workking.ViewPageFragment.RankFragment;
@@ -59,7 +59,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.main);
 
-        loadFlag();     //取SharedPreferences数据
+        System.out.println("数据长度" + Words.getBook1_1A_words().length);
+
+
+        loadFlag_data();     //取SharedPreferences数据
         initView(); //实例化各个组件
         //初始化viewpager
         initData();
@@ -70,18 +73,29 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     //取标志
-    private void loadFlag() {
+    private void loadFlag_data() {
         if(mSharePreferences == null){
             mSharePreferences = super.getSharedPreferences(FILENAME, Activity.MODE_PRIVATE);
-            System.out.println("文件取数据"+mSharePreferences.getInt("loadFlag",1));
+            System.out.println("文件取数据"+mSharePreferences.getInt("loadFlag_data",1));
         }
+
+
         if(mSharePreferences.getInt("loadFlag",1)!=1) {
+
+
+            inintTables();//生成表
+
+            //插入数据
+            InsertData insertData = new InsertData();
+            insertData.setmSqLiteDatabase(mSqLiteDatabase);
+            insertData.setmTableName(TABLENAME);
+            insertData.insertData();
+
             //修改读取flag
             SharedPreferences.Editor editor = mSharePreferences.edit();
             editor.putInt("loadFlag", 1);
             editor.commit();
         }
-
 
 
     }

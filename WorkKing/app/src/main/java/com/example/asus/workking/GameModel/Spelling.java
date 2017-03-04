@@ -45,6 +45,8 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void loadData() {
+
+        System.out.println("数据长度" + Record.mGamePross);
         //search databases
         MainActivity.getPositionData(Record.mGamePross);
         this.mWordMean.setText(MainActivity.mWordMean + "(注意大小写)");
@@ -55,7 +57,10 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        if(!Record.isEnd()) {
+        if(Record.mGamePross!=39) {
+
+            Record.mGamePross++;
+
             int position;
 
             if(mInput.getText().toString().equals(mRightAnswer)){
@@ -68,7 +73,11 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
             IntenActivity(position);
 
         }else{      //游戏结束
-
+            Toast.makeText(Spelling.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Spelling.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+            finish();
             return;
         }
     }

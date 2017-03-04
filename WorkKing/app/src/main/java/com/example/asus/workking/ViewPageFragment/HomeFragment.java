@@ -27,8 +27,10 @@ import com.example.asus.workking.GameModel.Translation;
 import com.example.asus.workking.LoginActivity;
 import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
+import com.example.asus.workking.Tools.InsertData;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+import com.example.asus.workking.Tools.Words;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,12 +183,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.begging:
                 Record.mGamePross= 1;
-                //int position = randomModel.getModelSum();
-                //IntenActivity(position);//intent activity
-                Intent intent3 = new Intent(getActivity(),Listening.class);
-                startActivity(intent3);
-                getActivity().overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
-                getActivity().finish();
+                Record.mWordCount = Words.getBook1_1A_words().length;//获取所有单词数
+                RandomModel.mWordCount = Words.getBook1_1A_words().length;//获取所有单词数
+                int position = randomModel.getModelSum();
+                IntenActivity(position);//intent activity
                 break;
         }
 

@@ -9,11 +9,18 @@ import java.util.Random;
 public class RandomModel  {
     private final static int MODEL_COUNT = 4;//random model count
     private Random random = null;
+
+    public static int mWordCount ;
+
     public RandomModel(){
         this.random = new Random();
     }
 
     public int getModelSum(){
-        return random.nextInt(MODEL_COUNT)+1;
+        return random.nextInt(MODEL_COUNT);
+    }
+
+    public int getWordPosition(){
+        return random.nextInt(mWordCount);
     }
 }

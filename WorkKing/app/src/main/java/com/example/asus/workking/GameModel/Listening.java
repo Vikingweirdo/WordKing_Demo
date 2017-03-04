@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.asus.workking.LoginActivity;
 import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+
+import java.util.Random;
 
 public class Listening extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,34 +61,48 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
     }
 
     private void loadData() {
+
+        System.out.println("数据长度" + Record.mGamePross);
         //search databases
         MainActivity.getPositionData(Record.mGamePross);
         this.mAnswer3.setText(MainActivity.mWord);
         this.mMediaPath = MainActivity.mMediaPath;
+
+        //设置干扰项
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.mAnswer2.setText(MainActivity.mWord);
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.mAnswer1.setText(MainActivity.mWord);
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.mAnswer4.setText(MainActivity.mWord);
     }
 
     @Override
     public void onClick(View view) {
-        if(!Record.isEnd()) {
+        if(Record.mGamePross!=39) {
 
             int position;
             switch (view.getId()) {
                 case R.id.answer1:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
-                    Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.answer2:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
 
                 case R.id.answer3:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.answer4:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
@@ -96,7 +113,11 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
                     break;
             }
         }else{      //游戏结束
-
+            Toast.makeText(Listening.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Listening.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+            finish();
             return;
         }
     }

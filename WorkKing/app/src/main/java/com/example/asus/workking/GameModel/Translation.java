@@ -12,6 +12,9 @@ import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+import com.example.asus.workking.Tools.Words;
+
+import java.util.Random;
 
 public class Translation extends AppCompatActivity implements View.OnClickListener {
     public static String Problem = null;
@@ -57,41 +60,60 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
     }
 
     private void loadData() {
+
+        System.out.println("数据长度" + Record.mGamePross);
         //search databases
         MainActivity.getPositionData(Record.mGamePross);
         this.wordmean.setText(MainActivity.mWordMean);
         this.answer1.setText(MainActivity.mWord);
+
+       //设置干扰项
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.answer2.setText(MainActivity.mWord);
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.answer3.setText(MainActivity.mWord);
+        MainActivity.getPositionData(new Random().nextInt(39));
+        this.answer4.setText(MainActivity.mWord);
     }
 
     @Override
     public void onClick(View view) {
 
-        if(!Record.isEnd()) {
+        if(Record.mGamePross!=39) {
 
             int position;
             switch (view.getId()) {
                 case R.id.answer1:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.answer2:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
 
                 case R.id.answer3:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
 
                 case R.id.answer4:
+                    Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
             }
         }else{      //游戏结束
 
+            Toast.makeText(Translation.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Translation.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+            finish();
             return;
         }
     }
