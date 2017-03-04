@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (mCursor.getString(1).equals(mUsername.getText().toString()) &&
                                         mCursor.getString(4).equals(mPassword.getText().toString())) {
 
-                                    MainActivity.myDB = mDataBases;
+                                    MainActivity.mDbHelper = mDataBases;
                                     //发送handle信号
                                     Message msg = new Message();
                                     msg.what = 1;

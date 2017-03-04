@@ -2,7 +2,6 @@ package com.example.asus.workking;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.example.asus.workking.Database.DBHelper;
+import com.example.asus.workking.Tools.InsertData;
 import com.example.asus.workking.ViewPageFragment.HomeFragment;
 import com.example.asus.workking.ViewPageFragment.MeFragment;
 import com.example.asus.workking.ViewPageFragment.RankFragment;
@@ -44,8 +44,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private List<ChangeColorIconWithText> mTabIndicator = new ArrayList<>();
 
     //SQLiteDatabases Object
-    private static SQLiteDatabase mDB = null;
-    public static DBHelper myDB = null;
+    private static SQLiteDatabase mSqLiteDatabase = null;
+    public static DBHelper mDbHelper = null;
 
     //从数据库取数据填装变量
     public static String mWord = null;
@@ -74,54 +74,39 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if(mSharePreferences == null){
             mSharePreferences = super.getSharedPreferences(FILENAME, Activity.MODE_PRIVATE);
             System.out.println("文件取数据"+mSharePreferences.getInt("loadFlag",1));
-        }else{
-            System.out.println(mSharePreferences.getInt("loadFlag",1));
         }
+        if(mSharePreferences.getInt("loadFlag",1)!=1) {
+            //修改读取flag
+            SharedPreferences.Editor editor = mSharePreferences.edit();
+            editor.putInt("loadFlag", 1);
+            editor.commit();
+        }
+
+
+
     }
 
-    private void insertData() {
-        ContentValues cv = new ContentValues();
-        cv.put("id",5);
-        cv.put("word","pledge");
-        cv.put("imagepath",R.drawable.pledge);
-        cv.put("mediapath",R.raw.pledge);
-        cv.put("wordmean","v.新建");
-        mDB.insert(TABLENAME,null,cv);
-    }
 
-    //修改掉这个用户的flag  下次登陆不再加载表
-    private void updataFlag(String username) {
-        ContentValues cv = new ContentValues();
-        cv.put("imagepath", 1);
-        //where 子句 "?"是占位符号，对应后面的"1",
-        String whereClause = "word=?";
-        String[] whereArgs = {username};
-        //参数1 是要更新的表名
-        //参数2 是一个ContentValeus对象
-        //参数3 是where子句
-        mDB.update("UserInfo", cv, whereClause, whereArgs);
-    }
 
     public static void getPositionData(int position) {
-        mDB = myDB.getReadableDatabase();
-        Cursor cursor = mDB.query(TABLENAME,null, null, null, null, null, null);
+        mSqLiteDatabase = mDbHelper.getReadableDatabase();
+        Cursor cursor = mSqLiteDatabase.query(TABLENAME,null, null, null, null, null, null);
 
         cursor.move(position);
+
+
         mWord = cursor.getString(cursor.getColumnIndex("word"));
-        mMediaPath = cursor.getInt(cursor.getColumnIndex("mediapath"));
         mPicturePath = cursor.getInt(cursor.getColumnIndex("imagepath"));
+        mMediaPath = cursor.getInt(cursor.getColumnIndex("mediapath"));
         mWordMean = cursor.getString(cursor.getColumnIndex("wordmean"));
-        System.out.println("1" + cursor.getColumnIndex("word"));
-        System.out.println("2" + cursor.getColumnIndex("imagepath"));
-        System.out.println("3" + cursor.getColumnIndex("mediapath"));
-        System.out.println("4" + cursor.getColumnIndex("wordmean"));
+
 
     }
 
     //Init databases tables
-    private void inintDatabase() {
-        myDB = new DBHelper(MainActivity.this, "UserInfo", null, 1);
-        this.mDB = myDB.getWritableDatabase();
+    private void inintTables() {
+
+        this.mSqLiteDatabase = mDbHelper.getWritableDatabase();
         String session = "A";
         for (int i = 1; i <= 2; i++) {
 
@@ -133,14 +118,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     tablename += "_";
                     tablename += k;
                     tablename += session;
-                    myDB.createTable(mDB, tablename);
+                    mDbHelper.createTable(mSqLiteDatabase, tablename);
                     System.out.println(tablename);
                 }
                 session = "B";
             }
             session = "A";
         }
-        mDB = myDB.getReadableDatabase();
+        mSqLiteDatabase = mDbHelper.getReadableDatabase();
 
     }
 
@@ -186,7 +171,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void initView() {
-        mDB = myDB.getWritableDatabase();//实例化数据库操作对象
+        mSqLiteDatabase = mDbHelper.getWritableDatabase();//实例化数据库操作对象
 
         mViewPager = (ViewPager) super.findViewById(R.id.viewpage);
 
