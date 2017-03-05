@@ -1,6 +1,9 @@
 package com.example.asus.workking;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,10 +12,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.asus.workking.Database.DBHelper;
+import com.example.asus.workking.GameModel.Listening;
+import com.example.asus.workking.GameModel.Pictures;
 import com.example.asus.workking.Tools.InsertData;
+import com.example.asus.workking.Tools.MyDialog;
 import com.example.asus.workking.Tools.Words;
 import com.example.asus.workking.ViewPageFragment.HomeFragment;
 import com.example.asus.workking.ViewPageFragment.MeFragment;
@@ -26,22 +33,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     public static String TABLENAME = "book1_1A";  //operated table name
     public final static String FILENAME = "loadflag";
+    public final static String GAMEPROSS = "gamepross";
 
     public static SharedPreferences mSharePreferences = null;
 
 
     private ViewPager mViewPager = null;
     private List<Fragment> mTabs = new ArrayList<>();
-    private String[] mTitles = new String[]{
-            "First",
-            "Scond",
-            "Third",
-            "Fouth"
-    };
-
     private FragmentPagerAdapter mAdapt = null;
-
     private List<ChangeColorIconWithText> mTabIndicator = new ArrayList<>();
+
 
     //SQLiteDatabases Object
     private static SQLiteDatabase mSqLiteDatabase = null;
@@ -58,9 +59,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.main);
-
-        System.out.println("数据长度" + Words.getBook1_1A_words().length);
-
 
         loadFlag_data();     //取SharedPreferences数据
         initView(); //实例化各个组件
@@ -79,7 +77,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             System.out.println("文件取数据"+mSharePreferences.getInt("loadFlag_data",1));
         }
 
-
         if(mSharePreferences.getInt("loadFlag",1)!=1) {
 
 
@@ -96,8 +93,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             editor.putInt("loadFlag", 1);
             editor.commit();
         }
-
-
     }
 
 
@@ -268,5 +263,40 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+
+
+
+    //先new出一个监听器，设置好监听
+    private DialogInterface.OnClickListener dialogOnclicListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch(which){
+                case Dialog.BUTTON_POSITIVE:
+                    finish();
+                    break;
+                //case Dialog.BUTTON_NEGATIVE:
+
+                //   break;
+                case Dialog.BUTTON_NEUTRAL:
+                    break;
+            }
+        }
+    };
+
+    //返回键的监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            MyDialog myDialog = null;
+            myDialog = new MyDialog(MainActivity.this);
+            myDialog.showDialog(dialogOnclicListener);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -3,6 +3,7 @@ package com.example.asus.workking.ViewPageFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private String mTitle = "Defult";
     public final static String TITLE = "tilte";
 
+    private  SharedPreferences mSharePreferences = null;
 
     //初始化界面
     private ImageButton book1 = null;
@@ -52,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private Toolbar mToolbar = null;
     private ImageButton mBegining = null;
     private TextView mShowUnit = null;
-    public static  TextView mShowCont = null;
+    private TextView mShowCont = null;
 
     //prepar activity list
     private RandomModel randomModel = new RandomModel();
@@ -80,10 +82,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
         initView(view);
-
+        ShowPross();//显示游戏进度
 
 
         return view;
+    }
+
+    private void ShowPross() {
+        this.mShowUnit.setText(mSharePreferences.getString("record_unit","First+"));
+        this.mShowCont.setText(mSharePreferences.getString("record_count","00"));
     }
 
     private void initView(View view) {
@@ -95,6 +102,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         this.mBegining = (ImageButton)view.findViewById(R.id.begging);
         this.mShowUnit = (TextView)view.findViewById(R.id.show_unit);
         this.mShowCont = (TextView)view.findViewById(R.id.show_cont);
+
+        this.mSharePreferences = getActivity().getSharedPreferences(MainActivity.GAMEPROSS
+                ,Activity.MODE_PRIVATE);
 
         this.book1.setOnClickListener(this);
         this.book2.setOnClickListener(this);
@@ -189,8 +199,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Record.mGamePross= 1;
                 Record.mWordCount = Words.getBook1_1A_words().length;//获取所有单词数
                 RandomModel.mWordCount = Words.getBook1_1A_words().length;//获取所有单词数
-                int position = randomModel.getModelSum();
-                IntenActivity(position);//intent activity
+                //int position = randomModel.getModelSum();
+                //IntenActivity(position);//intent activity
+                Intent intent3 = new Intent(getActivity(),Listening.class);
+                startActivity(intent3);
+                getActivity().overridePendingTransition(R.anim.in_anim,R.anim.out_anim);
+                getActivity().finish();
                 break;
         }
 

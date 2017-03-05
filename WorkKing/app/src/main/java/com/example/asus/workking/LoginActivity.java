@@ -1,6 +1,8 @@
 package com.example.asus.workking;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.workking.Database.DBHelper;
+import com.example.asus.workking.Tools.InsertData;
+import com.example.asus.workking.Tools.Words;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
     private RadioButton mStudent = null;
     private RadioButton mTeacher = null;
     private ProgressBar mProBar = null;
+
+    private SharedPreferences mSharePreferences = null;
+    private SharedPreferences.Editor mEditor = null;
+
 
     private int select;
 
@@ -158,6 +166,29 @@ public class LoginActivity extends AppCompatActivity {
         this.mDataOperate = mDataBases.getReadableDatabase();
         this.mCursor = mDataOperate.query("UserInfo",null,null,null,null,null,null);
 
+        this.mSharePreferences = super.getSharedPreferences(MainActivity.FILENAME,
+                Activity.MODE_PRIVATE);//实例化
+
         RegisterActivity.mOperate = mDataBases.getWritableDatabase();
+
+        recordFiles();
+    }
+
+    private void recordFiles() {
+        if(mSharePreferences == null){
+            mSharePreferences = super.getSharedPreferences(MainActivity.FILENAME,
+                    Activity.MODE_PRIVATE);
+        }
+        if(mSharePreferences.getInt("loadFlag",1)!=1) {
+
+            mSharePreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
+                    Activity.MODE_PRIVATE);
+            mEditor = mSharePreferences.edit();
+
+            mEditor.putString("record_unit","First");
+            mEditor.putString("record_count",String.valueOf(Words.getBook1_1B_words().length));
+            mEditor.commit();
+        }
+
     }
 }

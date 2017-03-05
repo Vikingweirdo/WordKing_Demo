@@ -1,8 +1,13 @@
 package com.example.asus.workking.GameModel;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
+import com.example.asus.workking.Tools.MyDialog;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
 import com.example.asus.workking.ViewPageFragment.HomeFragment;
@@ -24,6 +30,9 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
     private RandomModel mRandom = null;
 
     private String mRightAnswer = null;
+
+    private SharedPreferences mSharedPreferences = null;//游戏结束就设置进度
+    private SharedPreferences.Editor mEditor = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +87,16 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(Spelling.this, "Right Count :" + Record.mRightCount +
                             "Wrong Count :" + (Record.mWordCount - Record.mRightCount)
                     , Toast.LENGTH_SHORT).show();
-            HomeFragment.mShowCont.setText(String.valueOf(Record.mRightCount));//主界面显示游戏完成进度
+
+
+            //实例化
+            this.mSharedPreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
+                    Activity.MODE_PRIVATE);
+            this.mEditor = mSharedPreferences.edit();
+            mEditor.putString("record_count",String.valueOf(Record.mRightCount));
+            mEditor.commit();
+
+
             Intent intent = new Intent(Spelling.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
@@ -86,6 +104,8 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
             return;
         }
     }
+
+
 
 
 
@@ -119,5 +139,43 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
                 finish();
                 break;
         }
+    }
+
+
+
+
+    //先new出一个监听器，设置好监听
+    private DialogInterface.OnClickListener dialogOnclicListener = new DialogInterface.OnClickListener(){
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch(which){
+                case Dialog.BUTTON_POSITIVE:
+                    Intent intent = new Intent(Spelling.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                    finish();
+                    break;
+                //case Dialog.BUTTON_NEGATIVE:
+
+                //   break;
+                case Dialog.BUTTON_NEUTRAL:
+                    break;
+            }
+        }
+    };
+
+    //返回键的监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            MyDialog myDialog = null;
+            myDialog = new MyDialog(Spelling.this);
+            myDialog.showDialog(dialogOnclicListener);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

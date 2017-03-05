@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     public final static String FILENAME = "loadflag";
     public final static String TABLENAME = "UserInfo";
 
+
     //初始化组件
     private EditText mUsername = null;
     private EditText mPassword = null;
@@ -107,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         this.mSharePreferences = super.getSharedPreferences(FILENAME,
                 Activity.MODE_PRIVATE);
         this.mEditor = mSharePreferences.edit();
+
         MainActivity.mSharePreferences = this.mSharePreferences;    //取出数据使用
     }
 
