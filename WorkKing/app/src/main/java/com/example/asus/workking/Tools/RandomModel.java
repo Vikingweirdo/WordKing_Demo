@@ -21,6 +21,6 @@ public class RandomModel  {
     }
 
     public int getWordPosition(){
-        return random.nextInt(mWordCount);
+        return random.nextInt(mWordCount)+1;
     }
 }

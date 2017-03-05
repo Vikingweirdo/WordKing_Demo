@@ -13,6 +13,7 @@ import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+import com.example.asus.workking.ViewPageFragment.HomeFragment;
 
 public class Spelling extends AppCompatActivity implements View.OnClickListener{
 
@@ -51,13 +52,12 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
         MainActivity.getPositionData(Record.mGamePross);
         this.mWordMean.setText(MainActivity.mWordMean + "(注意大小写)");
         mRightAnswer = MainActivity.mWord;
-        Toast.makeText(Spelling.this,mRightAnswer,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View view) {
 
-        if(Record.mGamePross!=39) {
+        if(Record.mGamePross!=Record.mWordCount) {
 
             Record.mGamePross++;
 
@@ -65,6 +65,7 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
 
             if(mInput.getText().toString().equals(mRightAnswer)){
                 Toast.makeText(Spelling.this,"right answer",Toast.LENGTH_SHORT).show();
+                Record.mRightCount++;
             }else{
                 Toast.makeText(Spelling.this,"wrong answer",Toast.LENGTH_SHORT).show();
             }
@@ -74,6 +75,10 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
 
         }else{      //游戏结束
             Toast.makeText(Spelling.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Spelling.this, "Right Count :" + Record.mRightCount +
+                            "Wrong Count :" + (Record.mWordCount - Record.mRightCount)
+                    , Toast.LENGTH_SHORT).show();
+            HomeFragment.mShowCont.setText(String.valueOf(Record.mRightCount));//主界面显示游戏完成进度
             Intent intent = new Intent(Spelling.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);

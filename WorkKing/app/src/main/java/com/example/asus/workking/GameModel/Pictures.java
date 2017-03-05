@@ -15,17 +15,19 @@ import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+import com.example.asus.workking.Tools.Words;
 
 import java.util.Random;
 
 public class Pictures extends AppCompatActivity implements View.OnClickListener{
-    private Button answer1 = null;
-    private Button answer2 = null;
-    private Button answer3 = null;
-    private Button answer4 = null;
+    private ImageButton answer1 = null;
+    private ImageButton answer2 = null;
+    private ImageButton answer3 = null;
+    private ImageButton answer4 = null;
     private TextView word = null;
 
     private RandomModel mRandom = null;     //产生随机数
+    private int mRightPath ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,10 @@ public class Pictures extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void initView() {
-        this.answer1 = (Button)super.findViewById(R.id.answer1);
-        this.answer2 = (Button)super.findViewById(R.id.answer2);
-        this.answer3 = (Button)super.findViewById(R.id.answer3);
-        this.answer4 = (Button)super.findViewById(R.id.answer4);
+        this.answer1 = (ImageButton)super.findViewById(R.id.answer1);
+        this.answer2 = (ImageButton)super.findViewById(R.id.answer2);
+        this.answer3 = (ImageButton)super.findViewById(R.id.answer3);
+        this.answer4 = (ImageButton)super.findViewById(R.id.answer4);
         this.word = (TextView)super.findViewById(R.id.word);
 
         this.mRandom = new RandomModel();
@@ -63,20 +65,24 @@ public class Pictures extends AppCompatActivity implements View.OnClickListener{
         MainActivity.getPositionData(Record.mGamePross);
         this.word.setText(MainActivity.mWord);
         this.answer2.setBackgroundResource(MainActivity.mPicturePath);
+        this.mRightPath = MainActivity.mPicturePath;
 
         //设置干扰项
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer1.setBackgroundResource(MainActivity.mPicturePath);
-        MainActivity.getPositionData(new Random().nextInt(39));
+
+        //this.answer1.setBackgroundResource(MainActivity.mPicturePath);
+
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer3.setBackgroundResource(MainActivity.mPicturePath);
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer4.setBackgroundResource(MainActivity.mPicturePath);
 
     }
 
     @Override
     public void onClick(View view) {
-        if(Record.mGamePross!=39) {
+        if(Record.mGamePross!= Record.mWordCount) {
 
             int position;
             switch (view.getId()) {
@@ -84,10 +90,12 @@ public class Pictures extends AppCompatActivity implements View.OnClickListener{
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
-                    Toast.makeText(Pictures.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Pictures.this, "WRONG", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.answer2:
                     Record.mGamePross++;
+                    Record.mRightCount++;
+                    Toast.makeText(Pictures.this, "TRUE", Toast.LENGTH_SHORT).show();
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
                     break;
@@ -96,16 +104,21 @@ public class Pictures extends AppCompatActivity implements View.OnClickListener{
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    Toast.makeText(Pictures.this, "WRONG", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.answer4:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    Toast.makeText(Pictures.this, "WRONG", Toast.LENGTH_SHORT).show();
                     break;
             }
         }else{      //游戏结束
             Toast.makeText(Pictures.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Pictures.this, "Right Count :" + Record.mRightCount +
+                            "Wrong Count :" + (Record.mWordCount - Record.mRightCount)
+                    , Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Pictures.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);

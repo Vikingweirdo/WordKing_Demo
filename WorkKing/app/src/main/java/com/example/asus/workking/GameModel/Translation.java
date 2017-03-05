@@ -13,6 +13,7 @@ import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
 import com.example.asus.workking.Tools.Words;
+import com.example.asus.workking.ViewPageFragment.HomeFragment;
 
 import java.util.Random;
 
@@ -30,7 +31,7 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
     private TextView wordmean = null;
 
     private RandomModel mRandom = null;
-
+    private String mRight = null ;   //保存正确答案
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +67,21 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
         MainActivity.getPositionData(Record.mGamePross);
         this.wordmean.setText(MainActivity.mWordMean);
         this.answer1.setText(MainActivity.mWord);
+        this.mRight = MainActivity.mWord;
 
        //设置干扰项
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer2.setText(MainActivity.mWord);
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer3.setText(MainActivity.mWord);
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.answer4.setText(MainActivity.mWord);
     }
 
     @Override
     public void onClick(View view) {
 
-        if(Record.mGamePross!=39) {
+        if(Record.mGamePross!=Record.mWordCount) {
 
             int position;
             switch (view.getId()) {
@@ -87,29 +89,56 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
-                    Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    if(answer1.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Translation.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.answer2:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(answer2.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Translation.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case R.id.answer3:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(answer3.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Translation.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case R.id.answer4:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(answer4.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Translation.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }else{      //游戏结束
 
             Toast.makeText(Translation.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Translation.this, "Right Count :" + Record.mRightCount +
+                    "Wrong Count :" + (Record.mWordCount - Record.mRightCount)
+                    , Toast.LENGTH_SHORT).show();
+            HomeFragment.mShowCont.setText(String.valueOf(Record.mRightCount));//主界面显示游戏完成进度
             Intent intent = new Intent(Translation.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);

@@ -14,6 +14,8 @@ import com.example.asus.workking.MainActivity;
 import com.example.asus.workking.R;
 import com.example.asus.workking.Tools.RandomModel;
 import com.example.asus.workking.Tools.Record;
+import com.example.asus.workking.Tools.Words;
+import com.example.asus.workking.ViewPageFragment.HomeFragment;
 
 import java.util.Random;
 
@@ -29,6 +31,7 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
 
     private RandomModel mRandom = null;
     private int mMediaPath ;
+    private String mRight = null ;   //保存正确答案
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,19 +70,20 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
         MainActivity.getPositionData(Record.mGamePross);
         this.mAnswer3.setText(MainActivity.mWord);
         this.mMediaPath = MainActivity.mMediaPath;
+        this.mRight = MainActivity.mWord;
 
         //设置干扰项
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.mAnswer2.setText(MainActivity.mWord);
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.mAnswer1.setText(MainActivity.mWord);
-        MainActivity.getPositionData(new Random().nextInt(39));
+        MainActivity.getPositionData(mRandom.getWordPosition());
         this.mAnswer4.setText(MainActivity.mWord);
     }
 
     @Override
     public void onClick(View view) {
-        if(Record.mGamePross!=39) {
+        if(Record.mGamePross!= Record.mWordCount) {
 
             int position;
             switch (view.getId()) {
@@ -87,24 +91,47 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(mAnswer1.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Listening.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.answer2:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(mAnswer2.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Listening.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case R.id.answer3:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
-                    Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    if(mAnswer3.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Listening.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case R.id.answer4:
                     Record.mGamePross++;
                     position = mRandom.getModelSum();
                     IntenActivity(position);//intent activity
+                    if(mAnswer4.getText().equals(mRight)){
+                        Record.mRightCount++;
+                        Toast.makeText(Listening.this, "TRUE", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Listening.this, "WRONG", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case R.id.play:
@@ -114,6 +141,10 @@ public class Listening extends AppCompatActivity implements View.OnClickListener
             }
         }else{      //游戏结束
             Toast.makeText(Listening.this, "Game Over", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Listening.this, "Right Count :" + Record.mRightCount +
+                            "Wrong Count :" + (Record.mWordCount - Record.mRightCount)
+                    , Toast.LENGTH_SHORT).show();
+            HomeFragment.mShowCont.setText(String.valueOf(Record.mRightCount));//主界面显示游戏完成进度
             Intent intent = new Intent(Listening.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);

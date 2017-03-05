@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private ImageButton book4 = null;
     private Toolbar mToolbar = null;
     private ImageButton mBegining = null;
+    private TextView mShowUnit = null;
+    public static  TextView mShowCont = null;
 
     //prepar activity list
     private RandomModel randomModel = new RandomModel();
@@ -91,6 +93,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         this.book4 = (ImageButton) view.findViewById(R.id.book4);
         this.mToolbar = (Toolbar)view.findViewById(R.id.toolbar);
         this.mBegining = (ImageButton)view.findViewById(R.id.begging);
+        this.mShowUnit = (TextView)view.findViewById(R.id.show_unit);
+        this.mShowCont = (TextView)view.findViewById(R.id.show_cont);
 
         this.book1.setOnClickListener(this);
         this.book2.setOnClickListener(this);

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:background="#f0eddf"
     tools:context="com.example.asus.workking.GameModel.Spelling">
     <RelativeLayout
         android:layout_weight="1"

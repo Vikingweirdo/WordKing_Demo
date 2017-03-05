@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3"
+    android:background="#f0eddf"
     tools:context="com.example.asus.workking.GameModel.Translation">
 
     <RelativeLayout
@@ -35,16 +36,19 @@
             android:layout_weight="1"
             android:weightSum="2">
 
-            <Button
+            <ImageButton
                 android:id="@+id/answer1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <Button
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+            <ImageButton
                 android:id="@+id/answer2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:elevation="1dp" />
 
         </TableRow>
 
@@ -54,16 +58,18 @@
             android:layout_weight="1"
             android:weightSum="2">
 
-            <Button
+            <ImageButton
                 android:id="@+id/answer3"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <Button
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+            <ImageButton
                 android:id="@+id/answer4"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
         </TableRow>
     </TableLayout>
 
