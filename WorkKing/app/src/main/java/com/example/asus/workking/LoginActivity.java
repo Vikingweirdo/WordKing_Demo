@@ -187,6 +187,7 @@ public class LoginActivity extends AppCompatActivity {
 
             mEditor.putString("record_unit","First");
             mEditor.putString("record_count",String.valueOf(Words.getBook1_1B_words().length));
+            mEditor.putInt("record_book",1);
             mEditor.commit();
         }
 
