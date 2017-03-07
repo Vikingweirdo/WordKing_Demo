@@ -24,11 +24,7 @@ import com.example.asus.workking.ViewPageFragment.HomeFragment;
 import java.util.Random;
 
 public class Translation extends AppCompatActivity implements View.OnClickListener {
-    public static String Problem = null;
-    public static String A = null;
-    public static String B = null;
-    public static String C = null;
-    public static String D = null;
+
 
     private Button answer1 = null;
     private Button answer2 = null;
@@ -40,6 +36,7 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
     private String mRight = null ;   //保存正确答案
     private SharedPreferences mSharedPreferences = null;//游戏结束就设置进度
     private SharedPreferences.Editor mEditor = null;
+    private int modleFlag;  //模式标志
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +62,18 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
 
 
         loadData();//load game data
+        getModleFlag(); //获取测试的标志，判断是否是测试模式
 
+    }
+
+    private void getModleFlag() {
+        Intent intent = super.getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle!=null) {
+            this.modleFlag = bundle.getInt("modleFlag");
+        }else {
+            this.modleFlag = 0x000;
+        }
     }
 
     private void loadData() {
@@ -95,8 +103,19 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
             switch (view.getId()) {
                 case R.id.answer1:
                     Record.mGamePross++;
-                    position = mRandom.getModelSum();
-                    IntenActivity(position);//intent activity
+
+                    if (modleFlag == 0x111){    //只在改模块下循环游戏
+                        Intent mIntent = new Intent(Translation.this, Translation.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("modleFlag",0x111);   //判断是否是测试模式
+                        mIntent.putExtras(bundle);
+                        startActivity(mIntent);
+                        overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                        finish();
+                    }else {
+                        position = mRandom.getModelSum();
+                        IntenActivity(position);//intent activity
+                    }
                     if(answer1.getText().equals(mRight)){
                         Record.mRightCount++;
                         Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
@@ -106,8 +125,18 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
                     break;
                 case R.id.answer2:
                     Record.mGamePross++;
-                    position = mRandom.getModelSum();
-                    IntenActivity(position);//intent activity
+                    if (modleFlag == 0x111){    //只在改模块下循环游戏
+                        Intent mIntent = new Intent(Translation.this, Translation.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("modleFlag",0x111);   //判断是否是测试模式
+                        mIntent.putExtras(bundle);
+                        startActivity(mIntent);
+                        overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                        finish();
+                    }else {
+                        position = mRandom.getModelSum();
+                        IntenActivity(position);//intent activity
+                    }
                     if(answer2.getText().equals(mRight)){
                         Record.mRightCount++;
                         Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
@@ -118,8 +147,18 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
 
                 case R.id.answer3:
                     Record.mGamePross++;
-                    position = mRandom.getModelSum();
-                    IntenActivity(position);//intent activity
+                    if (modleFlag == 0x111){    //只在改模块下循环游戏
+                        Intent mIntent = new Intent(Translation.this, Translation.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("modleFlag",0x111);   //判断是否是测试模式
+                        mIntent.putExtras(bundle);
+                        startActivity(mIntent);
+                        overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                        finish();
+                    }else {
+                        position = mRandom.getModelSum();
+                        IntenActivity(position);//intent activity
+                    }
                     if(answer3.getText().equals(mRight)){
                         Record.mRightCount++;
                         Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
@@ -130,8 +169,18 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
 
                 case R.id.answer4:
                     Record.mGamePross++;
-                    position = mRandom.getModelSum();
-                    IntenActivity(position);//intent activity
+                    if (modleFlag == 0x111){    //只在改模块下循环游戏
+                        Intent mIntent = new Intent(Translation.this, Translation.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("modleFlag",0x111);   //判断是否是测试模式
+                        mIntent.putExtras(bundle);
+                        startActivity(mIntent);
+                        overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                        finish();
+                    }else {
+                        position = mRandom.getModelSum();
+                        IntenActivity(position);//intent activity
+                    }
                     if(answer4.getText().equals(mRight)){
                         Record.mRightCount++;
                         Toast.makeText(Translation.this, "TRUE", Toast.LENGTH_SHORT).show();
@@ -148,12 +197,13 @@ public class Translation extends AppCompatActivity implements View.OnClickListen
                     , Toast.LENGTH_SHORT).show();
 
             //实例化
-            this.mSharedPreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
-                    Activity.MODE_PRIVATE);
-            this.mEditor = mSharedPreferences.edit();
-            mEditor.putString("record_count",String.valueOf(Record.mRightCount));
-            mEditor.commit();
-
+            if(modleFlag!=0x111) {
+                this.mSharedPreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
+                        Activity.MODE_PRIVATE);
+                this.mEditor = mSharedPreferences.edit();
+                mEditor.putString("record_count", String.valueOf(Record.mRightCount));
+                mEditor.commit();
+            }
             Intent intent = new Intent(Translation.this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.in_anim, R.anim.out_anim);

@@ -39,6 +39,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private int select;
 
+    private String[] mFiles = {"book1","book2","book3","book4"};
+    private String[] mTabKey = {
+            "First1A",
+            "Second2A",
+            "Third3A",
+            "Fourth4A",
+            "Fifth5A",
+            "Sixth6A",
+            "Seventh7A",
+            "eighth8A",
+            "First1B",
+            "Second2B",
+            "Third3B",
+            "Fourth4B",
+            "Fifth5B",
+            "Sixth6B",
+            "Seventh7B",
+            "eighth8B"
+
+    };  //所有表的key
+
     //Handle操作界面跳转
     private Handler handler = new Handler(){
 
@@ -185,10 +206,49 @@ public class LoginActivity extends AppCompatActivity {
                     Activity.MODE_PRIVATE);
             mEditor = mSharePreferences.edit();
 
-            mEditor.putString("record_unit","First");
+            mEditor.putString("record_unit","First1A");
             mEditor.putString("record_count",String.valueOf(Words.getBook1_1B_words().length));
             mEditor.putInt("record_book",1);
             mEditor.commit();
+
+
+            initFiles();
+        }
+
+    }
+
+    //把四本书的记录都以文件的形式存入
+    private void initFiles() {
+        for (int x = 0 ; x < mFiles.length ; x++) {
+            SharedPreferences sharedPreferences = super.getSharedPreferences(mFiles[x]
+                    ,Activity.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            String session = "A";
+            int m = 0;
+            for (int i = 1; i <= 1; i++) {
+
+                for (int j = 1; j <= 2; j++) {
+
+                    for (int k = 1; k <= 8; k++) {
+                        String tablename = "book";
+                        tablename += i;
+                        tablename += "_";
+                        tablename += k;
+                        tablename += session;
+
+                        editor.putString(mTabKey[m],tablename);
+                        //System.out.println(mTabKey[m] +"------->" +tablename);
+                        m++;
+                    }
+                    session = "B";
+                }
+                session = "A";
+            }
+
+
+            editor.commit();    //input the files;
         }
 
     }

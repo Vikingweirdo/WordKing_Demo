@@ -33,6 +33,7 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
 
     private SharedPreferences mSharedPreferences = null;//游戏结束就设置进度
     private SharedPreferences.Editor mEditor = null;
+    private int modleFlag;  //模式标志
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,17 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
         this.mEnter.setOnClickListener(this);
 
         loadData();//load game data
+        getModleFlag(); //获取测试的标志，判断是否是测试模式
+    }
+
+    private void getModleFlag() {
+        Intent intent = super.getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle!=null) {
+            this.modleFlag = bundle.getInt("modleFlag");
+        }else {
+            this.modleFlag = 0x000;
+        }
     }
 
     private void loadData() {
@@ -79,8 +91,18 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
                 Toast.makeText(Spelling.this,"wrong answer",Toast.LENGTH_SHORT).show();
             }
 
-            position = mRandom.getModelSum();
-            IntenActivity(position);
+            if (modleFlag == 0x111){    //只在改模块下循环游戏
+                Intent mIntent = new Intent(Spelling.this, Spelling.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("modleFlag",0x111);   //判断是否是测试模式
+                mIntent.putExtras(bundle);
+                startActivity(mIntent);
+                overridePendingTransition(R.anim.in_anim, R.anim.out_anim);
+                finish();
+            }else {
+                position = mRandom.getModelSum();
+                IntenActivity(position);//intent activity
+            }
 
         }else{      //游戏结束
             Toast.makeText(Spelling.this, "Game Over", Toast.LENGTH_SHORT).show();
@@ -90,12 +112,13 @@ public class Spelling extends AppCompatActivity implements View.OnClickListener{
 
 
             //实例化
-            this.mSharedPreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
-                    Activity.MODE_PRIVATE);
-            this.mEditor = mSharedPreferences.edit();
-            mEditor.putString("record_count",String.valueOf(Record.mRightCount));
-            mEditor.commit();
-
+            if (modleFlag!=0x111) {
+                this.mSharedPreferences = super.getSharedPreferences(MainActivity.GAMEPROSS,
+                        Activity.MODE_PRIVATE);
+                this.mEditor = mSharedPreferences.edit();
+                mEditor.putString("record_count", String.valueOf(Record.mRightCount));
+                mEditor.commit();
+            }
 
             Intent intent = new Intent(Spelling.this, MainActivity.class);
             startActivity(intent);
