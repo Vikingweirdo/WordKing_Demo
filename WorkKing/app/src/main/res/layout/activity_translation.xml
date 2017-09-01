@@ -40,12 +40,14 @@
                 android:id="@+id/answer1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textAllCaps="false" />
             <Button
                 android:id="@+id/answer2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textAllCaps="false" />
 
         </TableRow>
 
@@ -59,12 +61,14 @@
                 android:id="@+id/answer3"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textAllCaps="false" />
             <Button
                 android:id="@+id/answer4"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textAllCaps="false" />
         </TableRow>
     </TableLayout>
 
